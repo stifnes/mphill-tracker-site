@@ -1,0 +1,1531 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MSc Tracksheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script>
+      // ── 1. PASTE YOUR SUPABASE DETAILS HERE (Project Settings → API) ──
+      window.TRACKER_CONFIG = {
+        SUPABASE_URL: "https://zrpijamhdonloaarhytl.supabase.co",
+        SUPABASE_ANON_KEY:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycGlqYW1oZG9ubG9hYXJoeXRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4ODE0OTAsImV4cCI6MjEwNzQ1NzQ5MH0.ZL7xxcY4ZhKoPt0DCSNZUwb2gAxSmfrbzj2cJZ5jn-Y",
+      };
+    </script>
+    <style>
+      :root {
+        --page: oklch(0.93 0.006 80);
+        --sheet: oklch(0.985 0.004 80);
+        --ink: oklch(0.22 0.015 260);
+        --muted: oklch(0.48 0.015 260);
+        --faint: oklch(0.6 0.015 260);
+        --line: oklch(0.8 0.01 260);
+        --card: #fff;
+        --teal: oklch(0.52 0.1 190);
+        --red: oklch(0.5 0.17 25);
+        --plum: oklch(0.5 0.1 320);
+        --track: oklch(0.9 0.008 80);
+        --warn: oklch(0.8 0.15 80);
+        --ok: oklch(0.55 0.12 150);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", Helvetica, Arial, sans-serif;
+      }
+      a {
+        color: var(--red);
+      }
+      a:hover {
+        color: oklch(0.4 0.17 25);
+      }
+      input,
+      textarea,
+      button {
+        font-family: inherit;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:disabled {
+        cursor: default;
+      }
+      .sheet {
+        max-width: 1700px;
+        margin: 0 auto;
+        padding: 36px 40px 48px;
+        background: var(--sheet);
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        min-height: 100vh;
+      }
+      .kicker {
+        font-size: 13px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .serif {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+      }
+      h1 {
+        margin: 0;
+        font-size: 30px;
+        line-height: 1.15;
+        max-width: 1100px;
+        text-wrap: pretty;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 14px;
+        color: var(--muted);
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1.5px solid var(--line);
+        border-radius: 999px;
+        padding: 3px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: var(--card);
+      }
+      .live {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--faint);
+      }
+      .live.on {
+        background: var(--ok);
+      }
+      .btn {
+        border: 0;
+        background: var(--ink);
+        color: #fff;
+        border-radius: 6px;
+        padding: 8px 14px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .btn.ghost {
+        background: none;
+        color: var(--muted);
+        border: 1.5px solid var(--line);
+      }
+      .btn:disabled {
+        opacity: 0.5;
+      }
+      .field {
+        border: 1.5px solid var(--line);
+        border-radius: 6px;
+        padding: 8px 10px;
+        font-size: 14px;
+        min-width: 0;
+        background: #fff;
+      }
+      .field:focus,
+      .btn:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--teal);
+        outline-offset: 1px;
+      }
+      .panel {
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        padding: 20px 22px;
+        background: var(--card);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        min-width: 0;
+      }
+      .panel-h {
+        font-size: 21px;
+        padding-bottom: 8px;
+        border-bottom: 1.5px solid var(--ink);
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+      }
+      .grid-layers {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 18px;
+      }
+      .grid-panels {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+        gap: 18px;
+      }
+      .meeting {
+        border-top: 1px solid oklch(0.92 0.006 80);
+        padding-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .meeting:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .meta {
+        font-size: 12px;
+        color: var(--faint);
+      }
+      .note {
+        white-space: pre-wrap;
+        font-size: 15px;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+      }
+      .comment {
+        margin-left: 14px;
+        padding-left: 12px;
+        border-left: 2px solid oklch(0.9 0.008 80);
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      .x {
+        border: 0;
+        background: none;
+        color: var(--faint);
+        font-size: 13px;
+        padding: 0 2px;
+      }
+      .x:hover {
+        color: var(--red);
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .empty {
+        font-size: 14px;
+        color: oklch(0.55 0.015 260);
+      }
+      .toast {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--ink);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 10;
+        max-width: calc(100% - 32px);
+      }
+      .center {
+        max-width: 460px;
+        margin: 12vh auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      @media (max-width: 640px) {
+        .sheet {
+          padding: 20px 16px 32px;
+          gap: 22px;
+        }
+        h1 {
+          font-size: 24px;
+        }
+        .stats {
+          gap: 18px !important;
+        }
+        .meet-form {
+          grid-template-columns: 1fr !important;
+        }
+        .legend-note {
+          margin-left: 0 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet" id="app"><div class="empty">Loading…</div></div>
+
+    <script>
+      (() => {
+        // ───────────────────────── Static plan (same as original sheet) ─────────────────────────
+        const START = new Date("2026-09-01"),
+          END = new Date("2028-09-01");
+        const LAYERS = [
+          {
+            id: "f",
+            kicker: "1 · Foundations",
+            title: "Learn first",
+            bg: "oklch(0.955 0.025 250)",
+            line: "oklch(0.55 0.1 250)",
+            tasks: [
+              ["f1", "Network flow data & CICFlowMeter features"],
+              ["f2", "What a DDoS attack is"],
+              ["f3", "Intrusion detection basics"],
+              ["f4", "Supervised classification", 1],
+              ["f5", "Train/test splitting & data leakage", 0, 1],
+              ["f6", "Metrics: precision, recall, F1, FPR, AUC", 1],
+              ["f7", "CIC-DDoS2019 dataset", 1],
+            ],
+          },
+          {
+            id: "b",
+            kicker: "2 · Baseline",
+            title: "Centralised",
+            bg: "oklch(0.955 0.014 70)",
+            line: "oklch(0.5 0.04 70)",
+            tasks: [
+              ["b1", "One detector on pooled data", 1],
+              ["b2", "Reproduce published results", 1],
+              ["b3", "Verify before building on it", 1],
+            ],
+          },
+          {
+            id: "l",
+            kicker: "3 · Federated learning",
+            title: "Collaborate",
+            bg: "oklch(0.955 0.03 190)",
+            line: "oklch(0.52 0.1 190)",
+            tasks: [
+              ["l1", "Core idea: move the model to the data", 1],
+              ["l2", "FedAvg: rounds + weight averaging", 1],
+              ["l3", "Cross-silo vs cross-device"],
+              ["l4", "Communication cost"],
+              ["l5", "Non-IID data"],
+              ["l6", "Dirichlet partitioning (simulated operators)", 1],
+              ["l7", "FedProx (alternative)"],
+            ],
+          },
+          {
+            id: "p",
+            kicker: "4 · Privacy",
+            title: "Protect",
+            bg: "oklch(0.955 0.022 320)",
+            line: "oklch(0.5 0.1 320)",
+            tasks: [
+              ["p1", "Federated learning alone is NOT private", 1, 1],
+              ["p2", "Threat models: curious server, curious participant"],
+              ["p3", "Attacks: membership, gradient leakage, source inference"],
+              ["p4", "Secure aggregation (lossless)"],
+              ["p5", "Differential privacy (costs accuracy)", 1],
+              ["p6", "DP-SGD: clip gradients + add noise", 1],
+              ["p7", "Privacy budget ε", 1],
+              ["p8", "Privacy accountant"],
+            ],
+          },
+          {
+            id: "e",
+            kicker: "5 · Experiment",
+            title: "Measure",
+            bg: "oklch(0.955 0.03 60)",
+            line: "oklch(0.55 0.11 60)",
+            tasks: [
+              ["e1", "Vary: ε, number of clients, heterogeneity", 1],
+              ["e2", "Centralised ceiling"],
+              ["e3", "Local-only floor", 1, 1],
+              ["e4", "Non-private federated"],
+              ["e5", "Multiple random seeds", 1],
+              ["e6", "Statistical significance testing"],
+              ["e7", "Privacy–accuracy curve", 1],
+            ],
+          },
+        ];
+        const MILESTONES = [
+          ["scope", "Scope agreed"],
+          ["prop", "Proposal / registration"],
+          ["lit", "Literature chapter"],
+        ];
+        const CHAPTERS = [
+          ["Introduction", 4000],
+          ["Literature review", 12000],
+          ["Methodology", 8000],
+          ["Implementation", 6000],
+          ["Results", 8000],
+          ["Discussion & conclusion", 6000],
+        ];
+
+        // ───────────────────────── Setup ─────────────────────────
+        const app = document.getElementById("app");
+        const cfg = window.TRACKER_CONFIG || {};
+        const configured =
+          cfg.SUPABASE_URL &&
+          !cfg.SUPABASE_URL.includes("YOUR-PROJECT") &&
+          cfg.SUPABASE_ANON_KEY &&
+          !cfg.SUPABASE_ANON_KEY.includes("YOUR-");
+
+        const S = {
+          session: null,
+          role: null,
+          members: {},
+          data: { status: {}, ms: {}, words: {} },
+          stateMeta: {},
+          meetings: [],
+          comments: [],
+          drafts: {},
+          editing: null,
+          live: false,
+          loaded: false,
+          busy: false,
+        };
+
+        // tiny DOM helper
+        function h(tag, attrs, ...kids) {
+          const el = document.createElement(tag);
+          for (const [k, v] of Object.entries(attrs || {})) {
+            if (v == null || v === false) continue;
+            if (k === "style") el.style.cssText = v;
+            else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+            else if (k === "text") el.textContent = v;
+            else el.setAttribute(k, v === true ? "" : v);
+          }
+          for (const kid of kids.flat())
+            if (kid != null && kid !== false)
+              el.append(
+                kid.nodeType ? kid : document.createTextNode(String(kid)),
+              );
+          return el;
+        }
+        function toast(msg) {
+          const t = h("div", { class: "toast", role: "status" }, msg);
+          document.body.append(t);
+          setTimeout(() => t.remove(), 3500);
+        }
+        const me = () => (S.session?.user?.email || "").toLowerCase();
+        const isOwner = () => S.role === "owner";
+        const nameOf = (email) =>
+          S.members[(email || "").toLowerCase()]?.display_name ||
+          (email || "").split("@")[0] ||
+          "Someone";
+        const fmtDate = (d) =>
+          new Date(d + (d.length === 10 ? "T00:00:00" : "")).toLocaleDateString(
+            undefined,
+            { day: "numeric", month: "short", year: "numeric" },
+          );
+        const fmtWhen = (d) =>
+          new Date(d).toLocaleString(undefined, {
+            day: "numeric",
+            month: "short",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+        if (!configured) {
+          app.replaceChildren(
+            h(
+              "div",
+              { class: "center" },
+              h(
+                "div",
+                { class: "serif", style: "font-size:24px" },
+                "Almost there",
+              ),
+              h(
+                "div",
+                { class: "note" },
+                "Open index.html and paste your Supabase project URL and anon key into TRACKER_CONFIG near the top, then reload. See SETUP.md for the steps.",
+              ),
+            ),
+          );
+          return;
+        }
+        if (!window.supabase) {
+          app.replaceChildren(
+            h(
+              "div",
+              { class: "center" },
+              h(
+                "div",
+                { class: "note" },
+                "Could not load the Supabase library. Check your internet connection and reload.",
+              ),
+            ),
+          );
+          return;
+        }
+        const sb = window.supabase.createClient(
+          cfg.SUPABASE_URL,
+          cfg.SUPABASE_ANON_KEY,
+        );
+
+        // ───────────────────────── Data ─────────────────────────
+        async function loadAll() {
+          const [m, st, mt, cm] = await Promise.all([
+            sb.from("members").select("*"),
+            sb.from("tracker_state").select("*").eq("id", 1).maybeSingle(),
+            sb
+              .from("meetings")
+              .select("*")
+              .order("date", { ascending: false })
+              .order("created_at", { ascending: false }),
+            sb
+              .from("comments")
+              .select("*")
+              .order("created_at", { ascending: true }),
+          ]);
+          const err = m.error || st.error || mt.error || cm.error;
+          if (err) throw err;
+          S.members = Object.fromEntries(
+            (m.data || []).map((r) => [r.email.toLowerCase(), r]),
+          );
+          S.role = S.members[me()]?.role || null;
+          if (st.data) {
+            S.data = Object.assign(
+              { status: {}, ms: {}, words: {} },
+              st.data.data,
+            );
+            S.stateMeta = st.data;
+          }
+          S.meetings = mt.data || [];
+          S.comments = cm.data || [];
+          S.loaded = true;
+        }
+        async function reload(table) {
+          if (table === "tracker_state") {
+            const r = await sb
+              .from("tracker_state")
+              .select("*")
+              .eq("id", 1)
+              .maybeSingle();
+            if (r.data) {
+              S.data = Object.assign(
+                { status: {}, ms: {}, words: {} },
+                r.data.data,
+              );
+              S.stateMeta = r.data;
+            }
+          } else if (table === "meetings") {
+            const r = await sb
+              .from("meetings")
+              .select("*")
+              .order("date", { ascending: false })
+              .order("created_at", { ascending: false });
+            if (!r.error) S.meetings = r.data;
+          } else if (table === "comments") {
+            const r = await sb
+              .from("comments")
+              .select("*")
+              .order("created_at", { ascending: true });
+            if (!r.error) S.comments = r.data;
+          }
+          render();
+        }
+        let channel = null;
+        function subscribe() {
+          if (channel) return;
+          channel = sb.channel("tracker");
+          for (const t of ["tracker_state", "meetings", "comments"])
+            channel.on(
+              "postgres_changes",
+              { event: "*", schema: "public", table: t },
+              () => reload(t),
+            );
+          channel.subscribe((status) => {
+            S.live = status === "SUBSCRIBED";
+            renderLive();
+          });
+        }
+
+        // Owner edits to the state row (queued so rapid clicks never overwrite each other)
+        let saveChain = Promise.resolve();
+        function saveState(patch) {
+          if (!isOwner()) return;
+          const prev = S.data;
+          S.data = { ...S.data, ...patch };
+          render();
+          const snapshot = S.data;
+          saveChain = saveChain.then(async () => {
+            const { error } = await sb
+              .from("tracker_state")
+              .update({ data: snapshot })
+              .eq("id", 1);
+            if (error) {
+              S.data = prev;
+              render();
+              toast("Could not save: " + error.message);
+            }
+          });
+        }
+
+        async function addMeeting(date, note) {
+          const { error } = await sb
+            .from("meetings")
+            .insert({ date, note, author_email: me() });
+          if (error) {
+            toast("Could not log meeting: " + error.message);
+            return false;
+          }
+          await reload("meetings");
+          return true;
+        }
+        async function updateMeeting(id, note) {
+          const { error } = await sb
+            .from("meetings")
+            .update({ note })
+            .eq("id", id);
+          if (error) {
+            toast("Could not save: " + error.message);
+            return false;
+          }
+          await reload("meetings");
+          return true;
+        }
+        async function deleteRow(table, id) {
+          if (
+            !confirm(
+              "Delete this " +
+                (table === "meetings"
+                  ? "meeting and its comments"
+                  : "comment") +
+                "?",
+            )
+          )
+            return;
+          const { error } = await sb.from(table).delete().eq("id", id);
+          if (error) toast("Could not delete: " + error.message);
+          else {
+            await reload(table);
+            if (table === "meetings") reload("comments");
+          }
+        }
+        async function addComment(meetingId, body) {
+          const { error } = await sb
+            .from("comments")
+            .insert({ meeting_id: meetingId, body, author_email: me() });
+          if (error) {
+            toast("Could not post: " + error.message);
+            return false;
+          }
+          await reload("comments");
+          return true;
+        }
+
+        // ───────────────────────── Views ─────────────────────────
+        function signInView() {
+          let sent = false;
+          const email = h("input", {
+            class: "field",
+            type: "email",
+            placeholder: "you@university.ie",
+            autocomplete: "email",
+            "aria-label": "Email",
+          });
+          const msg = h("div", { class: "empty" });
+          const btn = h(
+            "button",
+            { class: "btn", type: "submit" },
+            "Email me a sign-in link",
+          );
+          const form = h(
+            "form",
+            {
+              class: "row",
+              style: "flex-wrap:wrap",
+              onsubmit: async (e) => {
+                e.preventDefault();
+                if (sent || !email.value.trim()) return;
+                btn.disabled = true;
+                msg.textContent = "Sending…";
+                const { error } = await sb.auth.signInWithOtp({
+                  email: email.value.trim(),
+                  options: {
+                    emailRedirectTo: location.origin + location.pathname,
+                  },
+                });
+                if (error) {
+                  btn.disabled = false;
+                  msg.textContent = "Error: " + error.message;
+                  return;
+                }
+                sent = true;
+                msg.textContent =
+                  "Check your inbox and click the link to sign in. You can close this tab.";
+              },
+            },
+            h("div", { style: "flex:1;min-width:220px;display:flex" }, email),
+            btn,
+          );
+          email.style.flex = "1";
+          app.replaceChildren(
+            h(
+              "div",
+              { class: "center" },
+              h("div", { class: "kicker" }, "MSc by Research · TU Dublin"),
+              h(
+                "div",
+                { class: "serif", style: "font-size:26px;line-height:1.2" },
+                "Progress tracksheet",
+              ),
+              h(
+                "div",
+                { class: "note", style: "color:var(--muted)" },
+                "Sign in with the email address you were invited with. No password needed.",
+              ),
+              form,
+              msg,
+            ),
+          );
+          setTimeout(() => email.focus(), 0);
+        }
+
+        function notMemberView() {
+          app.replaceChildren(
+            h(
+              "div",
+              { class: "center" },
+              h(
+                "div",
+                { class: "serif", style: "font-size:24px" },
+                "No access yet",
+              ),
+              h(
+                "div",
+                { class: "note" },
+                `You're signed in as ${me()}, but this email isn't on the tracker's member list. Ask the student to add you.`,
+              ),
+              h(
+                "div",
+                null,
+                h(
+                  "button",
+                  { class: "btn ghost", onclick: () => sb.auth.signOut() },
+                  "Sign out",
+                ),
+              ),
+            ),
+          );
+        }
+
+        let liveEl = null;
+        function renderLive() {
+          if (!liveEl) return;
+          liveEl.className = "live" + (S.live ? " on" : "");
+          liveEl.title = S.live
+            ? "Live: changes appear instantly"
+            : "Not live: reload to see changes";
+        }
+
+        function render() {
+          if (!S.session) return signInView();
+          if (!S.loaded) return;
+          if (!S.role) return notMemberView();
+
+          // keep focus / caret across re-renders
+          const act = document.activeElement,
+            focusKey = act?.dataset?.key;
+          const sel =
+            focusKey && "selectionStart" in act
+              ? [act.selectionStart, act.selectionEnd]
+              : null;
+
+          const { status, ms, words } = S.data;
+          const owner = isOwner();
+          const now = new Date(),
+            wk = (d) => Math.floor((d - START) / 6048e5);
+          const weekTotal = wk(END),
+            weekNow = Math.min(Math.max(wk(now) + 1, 1), weekTotal);
+          let total = 0,
+            done = 0;
+
+          const layerEls = LAYERS.map((L) => {
+            let ld = 0;
+            const tasks = L.tasks.map(([id, label, isCrit, warn]) => {
+              const st = status[id] || 0;
+              if (st === 2) ld++;
+              const border = isCrit
+                ? "border:2.5px solid var(--red);"
+                : `border:1.5px solid ${L.line};`;
+              const fill =
+                st === 2
+                  ? `background:${L.line};color:#fff;`
+                  : st === 1
+                    ? `background:#fff;box-shadow:inset 5px 0 0 ${L.line};`
+                    : "background:#fff;";
+              const markStyle = `flex:0 0 20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;${st === 2 ? "background:rgba(255,255,255,0.25);color:#fff;" : st === 1 ? `color:${L.line};border:1.5px solid ${L.line};` : "border:1.5px solid oklch(0.75 0.01 260);"}`;
+              return h(
+                "button",
+                {
+                  style: `display:flex;align-items:center;gap:10px;text-align:left;width:100%;border-radius:7px;padding:10px 12px;font-size:15px;font-weight:500;line-height:1.3;${border}${fill}`,
+                  title: owner
+                    ? "Click: to do → in progress → done"
+                    : ["To do", "In progress", "Done"][st],
+                  "aria-label": `${label}: ${["to do", "in progress", "done"][st]}`,
+                  disabled: !owner,
+                  onclick: () =>
+                    saveState({ status: { ...status, [id]: (st + 1) % 3 } }),
+                },
+                h(
+                  "span",
+                  { style: markStyle },
+                  st === 2 ? "✓" : st === 1 ? "●" : "",
+                ),
+                h("span", { style: "flex:1;min-width:0" }, label),
+                warn
+                  ? h(
+                      "span",
+                      {
+                        style:
+                          "flex:0 0 20px;height:20px;border-radius:50%;background:var(--warn);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:var(--ink)",
+                      },
+                      "!",
+                    )
+                  : null,
+              );
+            });
+            total += tasks.length;
+            done += ld;
+            return h(
+              "div",
+              {
+                style: `border-radius:12px;background:${L.bg};padding:18px 16px;display:flex;flex-direction:column;gap:10px`,
+              },
+              h(
+                "div",
+                {
+                  style: `border-bottom:1.5px solid ${L.line};padding-bottom:12px;margin-bottom:4px`,
+                },
+                h(
+                  "div",
+                  {
+                    style:
+                      "display:flex;justify-content:space-between;align-items:baseline;gap:8px",
+                  },
+                  h(
+                    "div",
+                    {
+                      style: `font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:${L.line}`,
+                    },
+                    L.kicker,
+                  ),
+                  h(
+                    "div",
+                    {
+                      style:
+                        "font-size:13px;font-weight:600;color:oklch(0.4 0.015 260)",
+                    },
+                    `${ld}/${tasks.length}`,
+                  ),
+                ),
+                h(
+                  "div",
+                  { class: "serif", style: "font-size:22px;margin-top:2px" },
+                  L.title,
+                ),
+                h(
+                  "div",
+                  {
+                    style:
+                      "height:5px;border-radius:3px;background:rgba(0,0,0,0.08);margin-top:10px;overflow:hidden",
+                  },
+                  h("div", {
+                    style: `height:100%;background:${L.line};width:${Math.round((ld / tasks.length) * 100)}%`,
+                  }),
+                ),
+              ),
+              ...tasks,
+            );
+          });
+
+          const milestoneEls = MILESTONES.map(([id, label]) => {
+            const on = !!ms[id];
+            return h(
+              "button",
+              {
+                disabled: !owner,
+                "aria-pressed": String(on),
+                title: owner ? "Click to toggle" : on ? "Reached" : "Not yet",
+                style: `display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 14px 6px 8px;font-size:14px;font-weight:500;${on ? "background:var(--ink);color:#fff;border:1.5px solid var(--ink);" : "background:#fff;color:oklch(0.35 0.015 260);border:1.5px solid oklch(0.75 0.01 260);"}`,
+                onclick: () => saveState({ ms: { ...ms, [id]: !on } }),
+              },
+              h("span", {
+                style: `width:12px;height:12px;transform:rotate(45deg);${on ? "background:oklch(0.8 0.08 60);" : "border:1.5px solid var(--faint);"}`,
+              }),
+              label,
+            );
+          });
+
+          let wn = 0,
+            wt = 0;
+          const chapterEls = CHAPTERS.map(([name, target], i) => {
+            const w = +(words[i] || 0);
+            wn += w;
+            wt += target;
+            const pct = Math.min(100, Math.round((w / target) * 100));
+            return h(
+              "div",
+              {
+                style:
+                  "display:grid;grid-template-columns:minmax(0,1fr) 84px 64px;gap:12px;align-items:center;font-size:15px",
+              },
+              h(
+                "div",
+                { style: "min-width:0" },
+                h(
+                  "div",
+                  {
+                    style:
+                      "display:flex;justify-content:space-between;gap:8px;margin-bottom:5px",
+                  },
+                  h("span", { style: "font-weight:500" }, name),
+                  h(
+                    "span",
+                    { style: "font-size:13px;color:var(--muted)" },
+                    pct + "%",
+                  ),
+                ),
+                h(
+                  "div",
+                  {
+                    style:
+                      "height:6px;border-radius:3px;background:oklch(0.92 0.006 80);overflow:hidden",
+                  },
+                  h("div", {
+                    style: `height:100%;width:${pct}%;background:var(--plum)`,
+                  }),
+                ),
+              ),
+              owner
+                ? h("input", {
+                    class: "field",
+                    type: "number",
+                    min: "0",
+                    step: "100",
+                    value: String(w),
+                    "data-key": "words-" + i,
+                    "aria-label": name + " word count",
+                    style: "text-align:right;width:100%;padding:6px 8px",
+                    onchange: (e) =>
+                      saveState({
+                        words: {
+                          ...S.data.words,
+                          [i]: Math.max(0, +e.target.value || 0),
+                        },
+                      }),
+                  })
+                : h(
+                    "div",
+                    { style: "text-align:right;font-weight:600" },
+                    w.toLocaleString(),
+                  ),
+              h(
+                "div",
+                { style: "font-size:13px;color:var(--muted)" },
+                "of " + target.toLocaleString(),
+              ),
+            );
+          });
+
+          // meetings
+          const commentsFor = (id) =>
+            S.comments.filter((c) => c.meeting_id === id);
+          const canDel = (row) =>
+            owner || (row.author_email || "").toLowerCase() === me();
+          const commentEl = (c) =>
+            h(
+              "div",
+              { class: "comment" },
+              h(
+                "div",
+                {
+                  class: "row",
+                  style: "justify-content:space-between;align-items:baseline",
+                },
+                h(
+                  "span",
+                  { class: "meta" },
+                  h(
+                    "strong",
+                    { style: "color:var(--muted)" },
+                    nameOf(c.author_email),
+                  ),
+                  " · ",
+                  fmtWhen(c.created_at),
+                ),
+                canDel(c)
+                  ? h(
+                      "button",
+                      {
+                        class: "x",
+                        title: "Delete comment",
+                        "aria-label": "Delete comment",
+                        onclick: () => deleteRow("comments", c.id),
+                      },
+                      "×",
+                    )
+                  : null,
+              ),
+              h("div", { class: "note", style: "font-size:14px" }, c.body),
+            );
+          const commentBox = (key, meetingId, placeholder) => {
+            const inp = h("input", {
+              class: "field",
+              style: "flex:1",
+              placeholder,
+              value: S.drafts[key] || "",
+              "data-key": key,
+              "aria-label": placeholder,
+              oninput: (e) => {
+                S.drafts[key] = e.target.value;
+              },
+            });
+            const post = async () => {
+              const v = (S.drafts[key] || "").trim();
+              if (!v) return;
+              if (await addComment(meetingId, v)) {
+                S.drafts[key] = "";
+                render();
+              }
+            };
+            inp.addEventListener("keydown", (e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                post();
+              }
+            });
+            return h(
+              "div",
+              { class: "row" },
+              inp,
+              h(
+                "button",
+                {
+                  class: "btn ghost",
+                  style: "padding:7px 12px",
+                  onclick: post,
+                },
+                "Reply",
+              ),
+            );
+          };
+
+          const meetingEls = S.meetings.map((mt) => {
+            const editing = S.editing === mt.id;
+            let body;
+            if (editing) {
+              const ta = h("textarea", {
+                class: "field",
+                rows: "4",
+                style: "width:100%;resize:vertical",
+                "data-key": "edit-" + mt.id,
+                oninput: (e) => {
+                  S.drafts["edit-" + mt.id] = e.target.value;
+                },
+              });
+              ta.value = S.drafts["edit-" + mt.id] ?? mt.note;
+              body = h(
+                "div",
+                { style: "display:flex;flex-direction:column;gap:6px" },
+                ta,
+                h(
+                  "div",
+                  { class: "row" },
+                  h(
+                    "button",
+                    {
+                      class: "btn",
+                      style: "padding:6px 12px",
+                      onclick: async () => {
+                        const v = (S.drafts["edit-" + mt.id] ?? mt.note).trim();
+                        if (!v) return;
+                        if (await updateMeeting(mt.id, v)) {
+                          S.editing = null;
+                          delete S.drafts["edit-" + mt.id];
+                          render();
+                        }
+                      },
+                    },
+                    "Save",
+                  ),
+                  h(
+                    "button",
+                    {
+                      class: "btn ghost",
+                      style: "padding:6px 12px",
+                      onclick: () => {
+                        S.editing = null;
+                        delete S.drafts["edit-" + mt.id];
+                        render();
+                      },
+                    },
+                    "Cancel",
+                  ),
+                ),
+              );
+            } else body = h("div", { class: "note" }, mt.note);
+            return h(
+              "div",
+              { class: "meeting" },
+              h(
+                "div",
+                {
+                  class: "row",
+                  style:
+                    "justify-content:space-between;align-items:baseline;gap:10px",
+                },
+                h(
+                  "div",
+                  null,
+                  h("span", { style: "font-weight:600" }, fmtDate(mt.date)),
+                  h(
+                    "span",
+                    { class: "meta" },
+                    "  · logged by ",
+                    nameOf(mt.author_email),
+                  ),
+                ),
+                canDel(mt) && !editing
+                  ? h(
+                      "div",
+                      { class: "row", style: "gap:10px" },
+                      h(
+                        "button",
+                        {
+                          class: "x",
+                          onclick: () => {
+                            S.editing = mt.id;
+                            render();
+                          },
+                        },
+                        "Edit",
+                      ),
+                      h(
+                        "button",
+                        {
+                          class: "x",
+                          title: "Delete meeting",
+                          "aria-label": "Delete meeting",
+                          onclick: () => deleteRow("meetings", mt.id),
+                        },
+                        "Delete",
+                      ),
+                    )
+                  : null,
+              ),
+              body,
+              ...commentsFor(mt.id).map(commentEl),
+              h(
+                "div",
+                { style: "margin-left:14px" },
+                commentBox("c-" + mt.id, mt.id, "Add a comment…"),
+              ),
+            );
+          });
+
+          const today = now.toISOString().slice(0, 10);
+          const dateIn = h("input", {
+            class: "field",
+            type: "date",
+            "aria-label": "Meeting date",
+            value: S.drafts.newDate || today,
+            "data-key": "newDate",
+            oninput: (e) => {
+              S.drafts.newDate = e.target.value;
+            },
+          });
+          const noteIn = h("textarea", {
+            class: "field",
+            rows: "2",
+            placeholder: "Decisions, actions, next steps…",
+            "aria-label": "Meeting notes",
+            "data-key": "newNote",
+            style: "resize:vertical",
+            oninput: (e) => {
+              S.drafts.newNote = e.target.value;
+            },
+          });
+          noteIn.value = S.drafts.newNote || "";
+          const logBtn = h(
+            "button",
+            {
+              class: "btn",
+              onclick: async () => {
+                const note = (S.drafts.newNote || "").trim();
+                if (!note) {
+                  noteIn.focus();
+                  return;
+                }
+                logBtn.disabled = true;
+                if (await addMeeting(S.drafts.newDate || today, note)) {
+                  S.drafts.newNote = "";
+                  S.drafts.newDate = "";
+                  render();
+                } else logBtn.disabled = false;
+              },
+            },
+            "Log meeting",
+          );
+
+          const general = S.comments
+            .filter((c) => !c.meeting_id)
+            .slice()
+            .reverse();
+
+          liveEl = h("span", { class: "live" });
+          const meta = S.stateMeta.updated_by
+            ? `Progress last updated ${fmtWhen(S.stateMeta.updated_at)} by ${nameOf(S.stateMeta.updated_by)}`
+            : "";
+
+          app.replaceChildren(
+            h(
+              "div",
+              { class: "topbar" },
+              h(
+                "div",
+                { class: "row", style: "flex-wrap:wrap" },
+                liveEl,
+                h(
+                  "span",
+                  null,
+                  "Signed in as ",
+                  h("strong", { style: "color:var(--ink)" }, nameOf(me())),
+                ),
+                h("span", { class: "pill" }, owner ? "Student" : "Supervisor"),
+              ),
+              h(
+                "div",
+                { class: "row" },
+                meta ? h("span", { class: "meta" }, meta) : null,
+                h(
+                  "button",
+                  {
+                    class: "btn ghost",
+                    style: "padding:5px 12px",
+                    onclick: () => sb.auth.signOut(),
+                  },
+                  "Sign out",
+                ),
+              ),
+            ),
+
+            h(
+              "div",
+              {
+                style:
+                  "display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap",
+              },
+              h(
+                "div",
+                { style: "min-width:0" },
+                h(
+                  "div",
+                  { class: "kicker", style: "margin-bottom:6px" },
+                  "Progress tracksheet · MSc by Research · TU Dublin · Sep 2026 – Sep 2028",
+                ),
+                h(
+                  "h1",
+                  { class: "serif" },
+                  "Privacy vs. accuracy in federated DDoS detection for MaaS operators",
+                ),
+              ),
+              h(
+                "div",
+                {
+                  class: "stats",
+                  style: "display:flex;gap:28px;align-items:flex-end",
+                },
+                ...[
+                  ["Week", weekNow, weekTotal],
+                  ["Nodes done", done, total],
+                ].map(([k, a, b]) =>
+                  h(
+                    "div",
+                    { style: "text-align:right" },
+                    h("div", { class: "kicker", style: "font-size:12px" }, k),
+                    h(
+                      "div",
+                      { class: "serif", style: "font-size:34px;line-height:1" },
+                      String(a),
+                      h(
+                        "span",
+                        { style: "font-size:18px;color:oklch(0.55 0.015 260)" },
+                        " / " + b,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            h(
+              "div",
+              { style: "display:flex;flex-direction:column;gap:8px" },
+              h(
+                "div",
+                {
+                  style:
+                    "position:relative;height:10px;border-radius:5px;background:var(--track);overflow:hidden",
+                },
+                h("div", {
+                  style: `position:absolute;left:0;top:0;bottom:0;background:var(--teal);width:${Math.round(((weekNow - 1) / weekTotal) * 100)}%`,
+                }),
+              ),
+              h(
+                "div",
+                {
+                  style:
+                    "display:flex;justify-content:space-between;font-size:13px;color:var(--muted);gap:8px",
+                },
+                h("span", null, "Sep 2026"),
+                h(
+                  "span",
+                  { style: "text-align:center" },
+                  `Time elapsed ${Math.round(((weekNow - 1) / weekTotal) * 100)}% · Work done ${Math.round((done / total) * 100)}%`,
+                ),
+                h("span", null, "Sep 2028"),
+              ),
+            ),
+
+            h(
+              "div",
+              {
+                style:
+                  "display:flex;gap:10px;flex-wrap:wrap;align-items:center",
+              },
+              h(
+                "span",
+                { class: "kicker", style: "font-size:12px;margin-right:6px" },
+                "Milestones",
+              ),
+              ...milestoneEls,
+            ),
+
+            h("div", { class: "grid-layers" }, ...layerEls),
+
+            h(
+              "div",
+              {
+                style:
+                  "display:flex;gap:18px;font-size:13px;color:var(--muted);flex-wrap:wrap;align-items:center",
+              },
+              legend(
+                "border:1.5px solid var(--faint);background:#fff",
+                "To do",
+              ),
+              legend(
+                "border:1.5px solid var(--teal);background:linear-gradient(90deg,var(--teal) 50%,#fff 50%)",
+                "In progress",
+              ),
+              legend("background:var(--teal)", "Done"),
+              legend("border:2.5px solid var(--red)", "Critical path"),
+              h(
+                "span",
+                { style: "display:inline-flex;align-items:center;gap:6px" },
+                h(
+                  "span",
+                  {
+                    style:
+                      "width:16px;height:16px;border-radius:50%;background:var(--warn);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:var(--ink)",
+                  },
+                  "!",
+                ),
+                "Commonly misunderstood",
+              ),
+              h(
+                "span",
+                { class: "legend-note", style: "margin-left:auto" },
+                owner
+                  ? "Click any node or milestone to update. Saved online for you and your supervisors."
+                  : "Progress is updated by the student. You can log meetings and leave comments below.",
+              ),
+            ),
+
+            h(
+              "div",
+              { class: "grid-panels" },
+              h(
+                "div",
+                { class: "panel" },
+                h(
+                  "div",
+                  { class: "panel-h serif" },
+                  "Supervisor meetings",
+                  h(
+                    "span",
+                    {
+                      style:
+                        "font-family:IBM Plex Sans,sans-serif;font-size:13px;font-weight:400;color:var(--muted)",
+                    },
+                    `${S.meetings.length} logged`,
+                  ),
+                ),
+                h(
+                  "div",
+                  {
+                    class: "meet-form",
+                    style:
+                      "display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:8px;align-items:start",
+                  },
+                  dateIn,
+                  noteIn,
+                  logBtn,
+                ),
+                h(
+                  "div",
+                  { style: "display:flex;flex-direction:column;gap:12px" },
+                  meetingEls.length
+                    ? meetingEls
+                    : h("div", { class: "empty" }, "No meetings logged yet."),
+                ),
+              ),
+
+              h(
+                "div",
+                {
+                  style:
+                    "display:flex;flex-direction:column;gap:18px;min-width:0",
+                },
+                h(
+                  "div",
+                  { class: "panel" },
+                  h(
+                    "div",
+                    { class: "panel-h serif" },
+                    "Thesis writing",
+                    h(
+                      "span",
+                      {
+                        style:
+                          "font-family:IBM Plex Sans,sans-serif;font-size:14px;font-weight:400;color:var(--muted)",
+                      },
+                      h(
+                        "strong",
+                        { style: "color:var(--ink)" },
+                        wn.toLocaleString(),
+                      ),
+                      " / " + wt.toLocaleString() + " words",
+                    ),
+                  ),
+                  h(
+                    "div",
+                    { style: "display:flex;flex-direction:column;gap:12px" },
+                    ...chapterEls,
+                  ),
+                ),
+                h(
+                  "div",
+                  { class: "panel" },
+                  h("div", { class: "panel-h serif" }, "Feedback & comments"),
+                  commentBox(
+                    "general",
+                    null,
+                    owner
+                      ? "Note a question for your supervisors…"
+                      : "Leave feedback for the student…",
+                  ),
+                  h(
+                    "div",
+                    { style: "display:flex;flex-direction:column;gap:10px" },
+                    general.length
+                      ? general.map((c) => {
+                          const el = commentEl(c);
+                          el.style.marginLeft = "0";
+                          return el;
+                        })
+                      : h("div", { class: "empty" }, "No comments yet."),
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          renderLive();
+          if (focusKey) {
+            const el = app.querySelector(
+              `[data-key="${CSS.escape(focusKey)}"]`,
+            );
+            if (el) {
+              el.focus();
+              if (sel)
+                try {
+                  el.setSelectionRange(sel[0], sel[1]);
+                } catch (_) {}
+            }
+          }
+        }
+        function legend(boxStyle, label) {
+          return h(
+            "span",
+            { style: "display:inline-flex;align-items:center;gap:6px" },
+            h("span", {
+              style: `width:16px;height:16px;border-radius:4px;${boxStyle}`,
+            }),
+            label,
+          );
+        }
+
+        // ───────────────────────── Auth flow ─────────────────────────
+        async function onSession(session) {
+          const was = S.session?.user?.id;
+          S.session = session;
+          if (!session) {
+            S.loaded = false;
+            S.role = null;
+            if (channel) {
+              sb.removeChannel(channel);
+              channel = null;
+            }
+            return render();
+          }
+          if (was === session.user.id && (S.loaded || S.loading)) return;
+          S.loading = true;
+          app.replaceChildren(
+            h("div", { class: "empty" }, "Loading your tracker…"),
+          );
+          try {
+            await loadAll();
+          } catch (e) {
+            S.loading = false;
+            app.replaceChildren(
+              h(
+                "div",
+                { class: "center" },
+                h(
+                  "div",
+                  { class: "note" },
+                  "Could not load data: " + (e.message || e),
+                ),
+              ),
+            );
+            return;
+          }
+          S.loading = false;
+          if (S.role) subscribe();
+          render();
+        }
+        sb.auth.onAuthStateChange((_evt, session) => {
+          setTimeout(() => onSession(session), 0);
+        });
+        sb.auth.getSession().then(({ data }) => onSession(data.session));
+        // refresh when tab comes back (covers missed realtime events after sleep)
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden && S.role)
+            ["tracker_state", "meetings", "comments"].forEach(reload);
+        });
+      })();
+    </script>
+  </body>
+</html>

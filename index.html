@@ -81,14 +81,10 @@
   const LAYERS = [
     { id:'f', kicker:'1 · Foundations', title:'Learn first', bg:'oklch(0.955 0.025 250)', line:'oklch(0.55 0.1 250)', tasks:[
       ['f1','Network flow data & CICFlowMeter features'],['f2','What a DDoS attack is'],['f3','Intrusion detection basics'],['f4','Supervised classification',1],['f5','Train/test splitting & data leakage',0,1],['f6','Metrics: precision, recall, F1, FPR, AUC',1],['f7','CIC-DDoS2019 dataset',1]]},
-    { id:'b', kicker:'2 · Baseline', title:'Centralised', bg:'oklch(0.955 0.014 70)', line:'oklch(0.5 0.04 70)', tasks:[
-      ['b1','One detector on pooled data',1],['b2','Reproduce published results',1],['b3','Verify before building on it',1]]},
-    { id:'l', kicker:'3 · Federated learning', title:'Collaborate', bg:'oklch(0.955 0.03 190)', line:'oklch(0.52 0.1 190)', tasks:[
-      ['l1','Core idea: move the model to the data',1],['l2','FedAvg: rounds + weight averaging',1],['l3','Cross-silo vs cross-device'],['l4','Communication cost'],['l5','Non-IID data'],['l6','Dirichlet partitioning (simulated operators)',1],['l7','FedProx (alternative)']]},
-    { id:'p', kicker:'4 · Privacy', title:'Protect', bg:'oklch(0.955 0.022 320)', line:'oklch(0.5 0.1 320)', tasks:[
-      ['p1','Federated learning alone is NOT private',1,1],['p2','Threat models: curious server, curious participant'],['p3','Attacks: membership, gradient leakage, source inference'],['p4','Secure aggregation (lossless)'],['p5','Differential privacy (costs accuracy)',1],['p6','DP-SGD: clip gradients + add noise',1],['p7','Privacy budget ε',1],['p8','Privacy accountant']]},
-    { id:'e', kicker:'5 · Experiment', title:'Measure', bg:'oklch(0.955 0.03 60)', line:'oklch(0.55 0.11 60)', tasks:[
-      ['e1','Vary: ε, number of clients, heterogeneity',1],['e2','Centralised ceiling'],['e3','Local-only floor',1,1],['e4','Non-private federated'],['e5','Multiple random seeds',1],['e6','Statistical significance testing'],['e7','Privacy–accuracy curve',1]]},
+    { id:'b', kicker:'2 · Baseline', title:'Centralised', bg:'oklch(0.955 0.014 70)', line:'oklch(0.5 0.04 70)', tasks:[]},
+    { id:'l', kicker:'3 · Federated learning', title:'Collaborate', bg:'oklch(0.955 0.03 190)', line:'oklch(0.52 0.1 190)', tasks:[]},
+    { id:'p', kicker:'4 · Privacy', title:'Protect', bg:'oklch(0.955 0.022 320)', line:'oklch(0.5 0.1 320)', tasks:[]},
+    { id:'e', kicker:'5 · Experiment', title:'Measure', bg:'oklch(0.955 0.03 60)', line:'oklch(0.55 0.11 60)', tasks:[]},
   ];
   const MILESTONES = [['scope','Scope agreed'],['prop','Proposal / registration'],['lit','Literature chapter']];
   const CHAPTERS = [['Introduction',4000],['Literature review',12000],['Methodology',8000],['Implementation',6000],['Results',8000],['Discussion & conclusion',6000]];
